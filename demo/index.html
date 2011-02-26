@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Validator</title>
+        
+        <style>
+            label{
+                display: block;
+                margin: 0 0 10px;
+                font: bold 14px "Lucida Grande", Tahoma;
+                color: #999;
+            }
+            
+            input{
+                display: block;
+                padding: 5px;
+                width: 300px;
+                font: bold 16px "Lucida Grande";
+                margin: 0 0 20px;
+            }
+        </style>
+    </head>
+    
+    <body>
+        
+        <form>
+            <label>Alpha</label>
+            <input type="text" name="Alpha" data-validate="alpha required">
+            
+            <label>Age</label>
+            <input type="text" name="Age" data-validate="digit">
+            
+            <label>Amount</label>
+            <input type="text" name="Amount" data-validate="numeric">
+            
+            <label>Email</label>
+            <input type="text" name="Email" data-validate="email">
+            
+            <label>Zip</label>
+            <input type="text" name="Zip" data-validate="uszip">
+            
+            <button type="submit">Submit</button>
+        </form>
+        
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script>
+        <script src="../src/validator.js"></script>
+        <script>
+            $(document).ready(function(){
+                
+                $("form").submit(function(e){
+                    e.preventDefault();
+                    
+                    var form = $(this);
+                    
+                    if( validator.isValid( form ) ){
+                        alert("Yes. It is valid");
+                    }
+                    else{
+                        alert(validator.errors().join("<br />"));
+                    }
+                });
+                
+            });
+        </script>
+    </body>
+</html>
