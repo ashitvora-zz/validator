@@ -58,7 +58,7 @@ var validator = {};
     // return true or false
     validator.isValid = function(form){
         errors = [];
-        var fieldsToValidate = form.find("input, select");
+        var fieldsToValidate = form.find("input, select, textarea");
         
         $.each(fieldsToValidate, function(i, field){
             
