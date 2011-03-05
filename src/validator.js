@@ -57,7 +57,7 @@ var validator = {};
     // store error messages in a global array
     // return true or false
     validator.isValid = function(form){
-        
+        errors = [];
         var fieldsToValidate = form.find("input, select");
         
         $.each(fieldsToValidate, function(i, field){
