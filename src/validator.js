@@ -1,11 +1,12 @@
-var validator = {};
-
 (function($, undefined){
-    
-    // list of all the regex
+	window.Validator = {};
+	
+	
+	// list of all the regex
     // name => regex
+	/*
     var regex = {
-        alpha : /^[a-zA-z\s]+$/,
+        alpha : "",
         numeric : /^[-]?\d+(\.\d+)?$/,
         digit : /^\d+$/,
         alphanumeric : /^[a-zA-Z0-9]+$/,
@@ -20,35 +21,123 @@ var validator = {};
         ip : "",
         required : /.+/
     };
-    
-    
-    var validate = function(config){
-        var field = config.field,
-            name = config.fieldName;
-            
-            
-        $.each(config.toValidate, function(i, rule){
-            
-            if(! regex[rule].test( $(field).val() ) ){
-                //console.error(name +" is not "+ rule);
-                errors.push(name +" is not "+ rule);
-            }            
-            
-        });
-          
-    };
-    
-    
-    
-    // stores list of errors
+	*/
+	
+	
+	
+	/**
+	 * List of all the Validations with
+	 * - Rule
+	 * - Error Message
+	 */
+	var validations = {
+		required: {
+			rule: function(f){
+				return $(f).val().match(/[\s]+/);
+			},
+			message: "should contains alphabets only"
+		},
+		alpha: {
+			rule: function(f){
+				return $(f).val().match(/^[a-zA-z\s]+$/);
+			},
+			message: "should contains alphabets only"
+		},
+		numeric: {
+			rule: function(f){
+				return $(f).val().match(/^[-]?\d+(\.\d+)?$/);
+			},
+			message: "should contains numbers only"
+		},
+		digit: {
+			rule: function(f){
+				return $(f).val().match(/^\d+$/);
+			},
+			message: "should contains positive numbers only"
+		},
+		alphanumeric: {
+			rule: function(f){
+				return $(f).val().match(/^[a-zA-Z0-9]+$/);
+			},
+			message: "should contains alphabets or numbers only"
+		},
+		email: {
+			rule: function(f){
+				return $(f).val().match(/^([a-zA-Z0-9_\.\-])+(\+[a-zA-Z0-9]+)*\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+			},
+			message: "not a valid email address"
+		},
+		uszip: {
+			rule: function(f){
+				return $(f).val().match(/^(\d{5}\-?(\d{4})? )$/);
+			},
+			message: "not a valid zipcode"
+		}
+	};
+	
+	
+	/**
+	 * Errors
+	 * 
+	 * Array containing array of errors.
+	 * Each error has 
+	 * - Error Message
+	 * - Field on which error occured
+	 */
     var errors = [];
+
+
+
+	/**
+	 * Validate method
+	 * 
+	 * loop thru all the fields that have name attribute
+	 */
+	Validator.validate = function(form){
+		form.find("[name]").each(function(i, field){
+			
+			var rules_to_apply = $(field).attr("data-validate").split("|");
+			
+			$.each(rules_to_apply, function(j, rule){
+				rule = $.trim(rule);
+				
+				if(validations.hasOwnProperty (rule) ){
+				
+					if( ! validations[rule].rule(field) ){
+						console.log($(field).attr("name") +" failed: "+ rule);
+					}
+					
+				}
+			});			
+			
+		});
+	};
+	
+	
+	/**
+	 * Return TRUE/FALSE whether Validation has passed or not
+	 */
+	Validator.passed = function(){
+		return errors.length == 0;
+	};
+	
+	
+	/**
+	 * Return TRUE/FALSE whether Validation has failed or not
+	 */
+	Validator.failed = function(){
+		return errors.length != 0;
+	};
+	
     
-    
-    // returns list of all the errors
-    validator.errors = function(){
+    /**
+     * Return an array containing Errors
+     */
+    Validator.errors = function(){
         return errors;
     };
     
+<<<<<<< HEAD
     
     
     // go thru all the input fields, select boxes and textareas
@@ -76,4 +165,6 @@ var validator = {};
         
     };
     
+=======
+>>>>>>> Refactored the code
 })(jQuery);
