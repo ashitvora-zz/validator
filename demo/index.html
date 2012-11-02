@@ -19,10 +19,25 @@
                 font: bold 16px "Lucida Grande";
                 margin: 0 0 20px;
             }
+
+			.alert{
+				display: none;
+			}
+			
+			.alert.alert-success{
+				color: green;
+			}
+			
+			.alert.alert-error{
+				color: red;
+			}
         </style>
     </head>
     
     <body>
+	
+		<div class="alert alert-success">Validation Passed</div>
+		<div class="alert alert-error"></div>
         
         <form>
             <label>Alpha</label>
@@ -38,20 +53,37 @@
             <input type="text" name="Email" data-validate="email">
             
             <label>Zip</label>
-            <input type="text" name="Zip" data-validate="uszip">
+            <input type="text" name="Zip" data-validate="uszip|jk">
             
             <button type="submit">Submit</button>
         </form>
         
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-        <script src="../src/validator.js"></script>
+        <script src="../src/validation.js"></script>
         <script>
+			/**
+			 *  Registering a sample custom Validation
+			 */
+			Validation.register("jk", function(f){
+				return false;
+			}, "{name} is just kidding with {val}");
+
             $(document).ready(function(){
                 
                 $("form").submit(function(e){
                     e.preventDefault();
-                    
-                    Validator.validate( $(this) );
+
+                    Validation.run( $(this) );
+
+					if( Validation.passed() ){
+						$(".alert.alert-success").show();
+						$(".alert.alert-error").hide();
+					}
+					else{
+						$(".alert.alert-success").hide();
+						$(".alert.alert-error").show()
+							.html( Validation.errors().join("<br>") );
+					}
                 });
                 
             });
