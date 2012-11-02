@@ -1,4 +1,16 @@
+/*!
+ * Validation Library
+ *
+ * Depends on jQuery (Tested on jQuery 1.8.2)
+ *
+ * Released under the MIT license
+ *
+ * Author: Ashit Vora (ashit.vora @ alfanso . com)
+ */
+
 (function($, undefined){
+	"use strict";
+	
 	window.Validation = {};
 	
 	/**
