@@ -9,7 +9,7 @@
 	 * - Error Message
 	 * - Field on which error occured
 	 */
-    var errors = [];
+	var errors = [];
 
 
 	/**
@@ -156,10 +156,10 @@
 	};
 	
     
-    /**
-     * Return an array containing Errors
-     */
-    Validation.errors = function(){
-        return errors;
-    };
+	/**
+	 * Return an array containing Errors
+	 */
+	Validation.errors = function(){
+	    return errors;
+	};
 })(jQuery);
