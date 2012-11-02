@@ -29,7 +29,7 @@
 	var validations = {
 		required: {
 			rule: function(f){
-				return $(f).val().match(/[\s]+/);
+				return $(f).val().match(/[\S]+/);
 			},
 			message: "{name} can not be blank"
 		},
