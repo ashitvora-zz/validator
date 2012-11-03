@@ -1,3 +1,15 @@
+/*!
+ * Validation Library
+ *
+ * Depends on jQuery (Tested on jQuery 1.8.2)
+ *
+ * Released under the MIT license
+ *
+ * Author: Ashit Vora
+ *         Rizwan Qureshi
+ *         
+ * Credits: Nicholas Ruunu (https://github.com/nicholasruunu)
+ */
 (function($, undefined){
 	window.Validation = {};
 	
@@ -44,25 +56,25 @@
 			rule: function(f){
 				return $(f).val().match(/^[a-zA-z\s]+$/);
 			},
-			message: "{name} should contains alphabets only"
+			message: "{name} should contain letters and spaces only"
 		},
 		numeric: {
 			rule: function(f){
 				return $(f).val().match(/^[-]?\d+(\.\d+)?$/);
 			},
-			message: "{name} should contains numbers only"
+			message: "{name} should contain numbers only"
 		},
 		digit: {
 			rule: function(f){
 				return $(f).val().match(/^\d+$/);
 			},
-			message: "{name} should contains positive numbers only"
+			message: "{name} should contain digits only"
 		},
 		alphanumeric: {
 			rule: function(f){
 				return $(f).val().match(/^[a-zA-Z0-9]+$/);
 			},
-			message: "{name} should contains alphabets or numbers only"
+			message: "{name} should contain letters and numbers only"
 		},
 		email: {
 			rule: function(f){
@@ -72,15 +84,15 @@
 		},
 		uszip: {
 			rule: function(f){
-				return $(f).val().match(/^(\d{5}\-?(\d{4})?)$/);
+				return $(f).val().match(/^(\d{5}\-?(\d{4})? )$/);
 			},
-			message: "{val} is not a valid zipcode"
+			message: "{val} is not a valid US zipcode"
 		},
 		usphone: {
 			rule: function(f){
 				return $(f).val().match(/^([0-9]( |-|.)?)?(\(?[0-9]{3}\)?|[0-9]{3})( |-|.)?([0-9]{3}( |-|.)?[0-9]{4}|[a-zA-Z0-9]{7})$/);
 			},
-			message: "{val} is not a valid phone number"
+			message: "{val} is not a valid US phone number"
 		},
 		creditcard: {
 			rule: function(f){
@@ -90,7 +102,7 @@
 		},
 		ssn: {
 			rule: function(f){
-				return $(f).val().match(/(^|\s)(00[1-9]|0[1-9]0|0[1-9][1-9]|[1-6]\d{2}|7[0-6]\d|77[0-2])(-?|[\. ])([1-9]0|0[1-9]|[1-9][1-9])\3(\d{3}[1-9]|[1-9]\d{3}|\d[1-9]\d{2}|\d{2}[1-9]\d)($|\s|[;:,!\.\?])/);
+				return $(f).val().match(/^((?!000)(?!666)([0-6]\d{2}|7[0-2][0-9]|73[0-3]|7[5-6][0-9]|77[0-1]))(\s|\-)((?!00)\d{2})(\s|\-)((?!0000)\d{4})$/);
 			},
 			message: "{val} is not a valid social security number"
 		},
@@ -177,11 +189,21 @@
 	 * -----------------------------------------
 	 */
 	Validation.register = function(name, rule, message){
-		if(! validations.hasOwnProperty(name) ){
-			validations[name] = {
-				rule: rule,
-				message: message
-			};
+		validations[name] = {
+			rule: rule,
+			message: message
+		};
+	};
+
+
+	/**
+	 * Update message method
+	 *
+	 * Update the error message of an existing rule
+	 */
+	Validation.update_message = function(name, message){
+		if( validations.hasOwnProperty(name) ){
+			validations[name].message = message;
 		}
 	};
 
@@ -195,9 +217,9 @@
 		// empty errors array
 		errors = [];
 		
-		form.find("[name]").each(function(i, field){
+		form.find("[data-validate]").each(function(i, field){
 			
-			var validations_to_test = $(field).attr("data-validate").split("|");
+			var validations_to_test = $(field).data("validate").split("|");
 			
 			$.each(validations_to_test, function(j, v){
 				// required, email, size[5], between[1,10]
@@ -227,7 +249,7 @@
 	 * Return TRUE/FALSE whether Validation has passed or not
 	 */
 	Validation.passed = function(){
-		return errors.length == 0;
+		return errors.length === 0;
 	};
 	
 	
@@ -235,7 +257,7 @@
 	 * Return TRUE/FALSE whether Validation has failed or not
 	 */
 	Validation.failed = function(){
-		return errors.length != 0;
+		return errors.length > 0;
 	};
 	
     
