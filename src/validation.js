@@ -15,9 +15,9 @@
 	
 	/**
 	 * Errors
-	 * 
+	 *
 	 * Array containing array of errors.
-	 * Each error has 
+	 * Each error has
 	 * - Error Message
 	 * - Field on which error occured
 	 */
@@ -29,7 +29,7 @@
 	 */
 	var generate_error_message = function(field, message){
 		return message.replace( "{name}", $(field).attr("name") )
-					  .replace( "{val}", $(field).val() );
+		              .replace( "{val}", $(field).val() );
 	};
 	
 	
@@ -104,11 +104,11 @@
 	
 	/**
 	 * Register new Validation
-	 * 
+	 *
 	 * -----------------------------------------
-	 * 	Validation.register("jk", function(f){
-	 * 		return false;
-	 * 	}, "{name} is just kidding with {val}");
+	 * Validation.register("jk", function(f){
+	 *     return false;
+	 * }, "{name} is just kidding with {val}");
 	 * -----------------------------------------
 	 */
 	Validation.register = function(name, rule, message){
@@ -123,7 +123,7 @@
 
 	/**
 	 * Validate method
-	 * 
+	 *
 	 * loop thru all the fields that have name attribute
 	 */
 	Validation.run = function(form){
@@ -142,7 +142,7 @@
 						errors.push( generate_error_message( field, validations[v].message) );
 					}
 				}
-			});			
+			});
 			
 		});
 	};
@@ -168,6 +168,6 @@
 	 * Return an array containing Errors
 	 */
 	Validation.errors = function(){
-	    return errors;
+		return errors;
 	};
 })(jQuery);
