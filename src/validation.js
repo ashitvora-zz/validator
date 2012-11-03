@@ -142,13 +142,13 @@
 		
 		form.find("[data-validate]").each(function(i, field){
 			
-			var validations_to_test = $(field).attr("data-validate").split("|");
+			var validations_to_test = $(field).data("validate").split("|");
 			
 			$.each(validations_to_test, function(j, v){
 				v = $.trim(v).toLowerCase();
 				
-				if(validations.hasOwnProperty (v) ){
-					if(! validations[v].rule(field) ){
+				if(validations.hasOwnProperty(v) ){
+					if( ! validations[v].rule(field) ){
 						errors.push( generate_error_message( field, validations[v].message) );
 					}
 				}
