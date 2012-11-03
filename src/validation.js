@@ -118,8 +118,6 @@
 				message: message
 			};
 		}
-		
-		console.log(validations);
 	};
 
 
@@ -138,8 +136,6 @@
 			
 			$.each(validations_to_test, function(j, v){
 				v = $.trim(v).toLowerCase();
-				
-				console.log("Testing for: "+ v);
 				
 				if(validations.hasOwnProperty (v) ){
 					if(! validations[v].rule(field) ){
