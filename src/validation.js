@@ -49,25 +49,25 @@
 			rule: function(f){
 				return $(f).val().match(/^[a-zA-z\s]+$/);
 			},
-			message: "{name} should contains alphabets only"
+			message: "{name} should contain letters and spaces only"
 		},
 		numeric: {
 			rule: function(f){
 				return $(f).val().match(/^[-]?\d+(\.\d+)?$/);
 			},
-			message: "{name} should contains numbers only"
+			message: "{name} should contain numbers only"
 		},
 		digit: {
 			rule: function(f){
 				return $(f).val().match(/^\d+$/);
 			},
-			message: "{name} should contains positive numbers only"
+			message: "{name} should contain digits only"
 		},
 		alphanumeric: {
 			rule: function(f){
 				return $(f).val().match(/^[a-zA-Z0-9]+$/);
 			},
-			message: "{name} should contains alphabets or numbers only"
+			message: "{name} should contain letters and numbers only"
 		},
 		email: {
 			rule: function(f){
@@ -85,13 +85,13 @@
 			rule: function(f){
 				return $(f).val().match(/^([0-9]( |-|.)?)?(\(?[0-9]{3}\)?|[0-9]{3})( |-|.)?([0-9]{3}( |-|.)?[0-9]{4}|[a-zA-Z0-9]{7})$/);
 			},
-			message: "{val} is not a valid phone number"
+			message: "{val} is not a valid US phone number"
 		},
 		creditcard: {
 			rule: function(f){
 				return $(f).val().match(/^((4\d{3})|(5[1-5]\d{2})|(6011))([- ])?\d{4}([- ])?\d{4}([- ])?\d{4}|3[4,7]\d{13}$/);
 			},
-			message: "{val} is not a valid social security number"
+			message: "{val} is not a valid credit card number"
 		},
 		ssn: {
 			rule: function(f){
