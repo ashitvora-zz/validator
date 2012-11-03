@@ -79,7 +79,7 @@
 			rule: function(f){
 				return $(f).val().match(/^(\d{5}\-?(\d{4})? )$/);
 			},
-			message: "{val} is not a valid zipcode"
+			message: "{val} is not a valid US zipcode"
 		},
 		usphone: {
 			rule: function(f){
@@ -97,13 +97,13 @@
 			rule: function(f){
 				return $(f).val().match(/(^|\s)(00[1-9]|0[1-9]0|0[1-9][1-9]|[1-6]\d{2}|7[0-6]\d|77[0-2])(-?|[\. ])([1-9]0|0[1-9]|[1-9][1-9])\3(\d{3}[1-9]|[1-9]\d{3}|\d[1-9]\d{2}|\d{2}[1-9]\d)($|\s|[;:,!\.\?])/);
 			},
-			message: "{val} is not a valid social security number"
+			message: "{val} is not a valid US social security number"
 		}
 	};
 	
 	
 	/**
-	 * Register new Validation
+	 * Register Validation
 	 *
 	 * -----------------------------------------
 	 * Validation.register("jk", function(f){
@@ -112,12 +112,10 @@
 	 * -----------------------------------------
 	 */
 	Validation.register = function(name, rule, message){
-		if(! validations.hasOwnProperty(name) ){
-			validations[name] = {
-				rule: rule,
-				message: message
-			};
-		}
+		validations[name] = {
+			rule: rule,
+			message: message
+		};
 	};
 
 
