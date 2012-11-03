@@ -41,19 +41,28 @@
         
         <form>
             <label>Alpha</label>
-            <input type="text" name="Alpha" data-validate="alpha|required">
+            <input type="text" name="Alpha" data-validate="alpha|required|size[3]">
             
             <label>Age</label>
-            <input type="text" name="Age" data-validate="digit">
+            <input type="text" name="Age" data-validate="alphanumeric">
             
             <label>Amount</label>
-            <input type="text" name="Amount" data-validate="numeric">
+            <input type="text" name="Amount" data-validate="creditcard">
             
             <label>Email</label>
             <input type="text" name="Email" data-validate="email">
             
             <label>Zip</label>
-            <input type="text" name="Zip" data-validate="uszip|jk">
+            <input type="text" name="Zip" data-validate="ssn">
+
+            <label>url</label>
+            <input type="text" name="url" data-validate="url">
+
+            <label>IPaddress</label>
+            <input type="text" name="IPaddress" data-validate="ip">
+
+            <label>Image</label>
+            <input type="text" name="Image" data-validate="image">
             
             <button type="submit">Submit</button>
         </form>
