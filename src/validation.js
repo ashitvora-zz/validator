@@ -5,10 +5,11 @@
  *
  * Released under the MIT license
  *
- * Author: Ashit Vora
- *         Rizwan Qureshi
- *         
- * Credits: Nicholas Ruunu (https://github.com/nicholasruunu)
+ * Author: Ashit Vora (ashit.vora@alfanso.com)
+ *          
+ * Credits: 
+ *	1. Nicholas Ruunu (https://github.com/nicholasruunu)
+ *	2. Rizwan Qureshi
  */
 (function($, undefined){
 	window.Validation = {};
