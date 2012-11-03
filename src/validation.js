@@ -22,7 +22,7 @@
 	 * - Error Message
 	 * - Field on which error occured
 	 */
-    var errors = [];
+    var errors = {};
 
 
 	/**
@@ -137,10 +137,10 @@
 				value = $(f).val();
 
 				if( isNaN(value) ){
-					return value.length >= parseInt(params[0]);
+					return value.length >= parseInt(params[0], 10);
 				}
 				else{
-					return parseInt(value) >= parseInt(params[0]);
+					return parseInt(value, 10) >= parseInt(params[0], 10);
 				}
 			},
 			message: "{name} must be minimum {param1}."
@@ -150,10 +150,10 @@
 				value = $(f).val();
 
 				if( isNaN(value) ){
-					return value.length <= parseInt(params[0]);
+					return value.length <= parseInt(params[0], 10);
 				}
 				else{
-					return parseInt(value) <= parseInt(params[0]);
+					return parseInt(value, 10) <= parseInt(params[0], 10);
 				}
 			},
 			message: "{name} should not be more than {param1}."
@@ -215,8 +215,8 @@
 	 * loop thru all the fields that have name attribute
 	 */
 	Validation.run = function(form){
-		// empty errors array
-		errors = [];
+		// empty errors object
+		errors = {};
 		
 		form.find("[data-validate]").each(function(i, field){
 			
@@ -237,7 +237,18 @@
 				
 				if(validations.hasOwnProperty (v) ){
 					if(! validations[v].rule(field, params) ){
-						errors.push( generate_error_message( field, validations[v].message, params) );
+						
+						var field_name = $(field).attr("name");
+						
+						// If this is the first error message for this field,
+						// add the field name as the key and set it's value as empty array
+						if( ! errors.hasOwnProperty(field_name) ){
+							errors[ field_name ] = [];
+						}
+						
+						errors[ $(field).attr("name") ].push(
+							generate_error_message( field, validations[v].message, params)
+						);
 					}
 				}
 			});			
@@ -250,7 +261,7 @@
 	 * Return TRUE/FALSE whether Validation has passed or not
 	 */
 	Validation.passed = function(){
-		return errors.length === 0;
+		return $.isEmptyObject(errors);
 	};
 	
 	
@@ -258,14 +269,39 @@
 	 * Return TRUE/FALSE whether Validation has failed or not
 	 */
 	Validation.failed = function(){
-		return errors.length > 0;
+		return ! $.isEmptyObject(errors);
 	};
 	
+	
+	/**
+	 * Returns an Array of Objects
+	 * 
+	 * Each object contains a field name as Key and an array of error messages
+	 * eg.
+	 * {
+	 * 	name: ["Should contain letters only"],
+	 *  password: [
+	 * 		"Should contain atleast one number",
+	 * 		"Should be minimum eight characters long",
+	 * 		"Should contain atleast one symbol"
+	 * 	]
+	 * }
+	 */
+	Validation.field_errors = function(){
+		return errors;
+	};
     
+
     /**
      * Return an array containing Errors
      */
     Validation.errors = function(){
-        return errors;
+		var error_messages = [];
+		
+		$.each(errors, function(field_name, errors){
+			error_messages = error_messages.concat(errors);
+		});
+		
+        return error_messages;
     };
 })(jQuery);

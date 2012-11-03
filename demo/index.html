@@ -40,29 +40,29 @@
 		<div class="alert alert-error"></div>
         
         <form>
-            <label>Alpha</label>
-            <input type="text" name="Alpha" data-validate="alpha|required|size[3]">
+            <label>Name</label>
+            <input type="text" name="name" data-validate="alpha|required|size[3]">
             
             <label>Age</label>
-            <input type="text" name="Age" data-validate="alphanumeric">
+            <input type="text" name="age" data-validate="alphanumeric">
             
-            <label>Amount</label>
-            <input type="text" name="Amount" data-validate="creditcard">
+            <label>Credit Card</label>
+            <input type="text" name="creditcard" data-validate="creditcard">
             
             <label>Email</label>
-            <input type="text" name="Email" data-validate="email">
+            <input type="text" name="email" data-validate="email">
             
-            <label>Zip</label>
-            <input type="text" name="Zip" data-validate="ssn">
+            <label>Zip Code</label>
+            <input type="text" name="zip" data-validate="ssn">
 
-            <label>url</label>
+            <label>URL</label>
             <input type="text" name="url" data-validate="url">
 
-            <label>IPaddress</label>
-            <input type="text" name="IPaddress" data-validate="ip">
+            <label>IP Address</label>
+            <input type="text" name="ipaddress" data-validate="ip">
 
             <label>Image</label>
-            <input type="text" name="Image" data-validate="image">
+            <input type="text" name="image" data-validate="image">
             
             <button type="submit">Submit</button>
         </form>
@@ -92,6 +92,8 @@
 						$(".alert.alert-success").hide();
 						$(".alert.alert-error").show()
 							.html( Validation.errors().join("<br>") );
+							
+						console.log(Validation.field_errors());
 					}
                 });
                 
