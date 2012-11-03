@@ -152,7 +152,7 @@
 	 * Return TRUE/FALSE whether Validation has passed or not
 	 */
 	Validation.passed = function(){
-		return errors.length == 0;
+		return errors.length === 0;
 	};
 	
 	
@@ -160,7 +160,7 @@
 	 * Return TRUE/FALSE whether Validation has failed or not
 	 */
 	Validation.failed = function(){
-		return errors.length != 0;
+		return errors.length > 0;
 	};
 	
     
