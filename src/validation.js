@@ -124,13 +124,13 @@
 	/**
 	 * Validate method
 	 *
-	 * loop thru all the fields that have name attribute
+	 * loop thru all the fields that have the data-validate attribute
 	 */
 	Validation.run = function(form){
 		// empty errors array
 		errors = [];
 		
-		form.find("[name]").each(function(i, field){
+		form.find("[data-validate]").each(function(i, field){
 			
 			var validations_to_test = $(field).attr("data-validate").split("|");
 			
