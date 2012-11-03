@@ -120,6 +120,18 @@
 
 
 	/**
+	 * Update message method
+	 *
+	 * Update the error message of an existing rule
+	 */
+	Validation.update_message = function(name, message){
+		if( validations.hasOwnProperty(name) ){
+			validations[name].message = message;
+		}
+	};
+
+
+	/**
 	 * Validate method
 	 *
 	 * loop thru all the fields that have the data-validate attribute
