@@ -22,7 +22,7 @@
 	 * - Error Message
 	 * - Field on which error occured
 	 */
-    var errors = {};
+	var errors = {};
 
 
 	/**
@@ -31,7 +31,7 @@
 	var generate_error_message = function(field, message, params){
 
 		message = message.replace( "{name}", $(field).attr("name") )
-					  	 .replace( "{val}", $(field).val() );
+						 .replace( "{val}", $(field).val() );
 
 		$.each(params, function(i, param){
 			message = message.replace("{param"+ (i+1) +"}", param);
@@ -212,7 +212,7 @@
 	/**
 	 * Validate method
 	 * 
-	 * loop thru all the fields that have name attribute
+	 * loop thru all the fields that have data-validate attribute
 	 */
 	Validation.run = function(form){
 		// empty errors object
@@ -290,18 +290,19 @@
 	Validation.field_errors = function(){
 		return errors;
 	};
-    
+	
 
-    /**
-     * Return an array containing Errors
-     */
-    Validation.errors = function(){
+	/**
+	 * Return an array containing Errors
+	 */
+	Validation.errors = function(){
 		var error_messages = [];
 		
 		$.each(errors, function(field_name, errors){
 			error_messages = error_messages.concat(errors);
 		});
 		
-        return error_messages;
-    };
+		return error_messages;
+	};
+	
 })(jQuery);

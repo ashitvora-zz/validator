@@ -39,4 +39,56 @@ Set rules to apply as value of the attribute (multiple rules separated by Pipe).
 		
 		Message can contain special keywords
 		- {name} will be replaced by name of the field
-		- {val} will be replace by the value of the field
+		- {val} will be replaced by the value of the field
+		- {param1} will be replaced by first parameter, 
+		  {param2} will be replaced by second paratmer and so on…
+		  
+		  In size[1], 1 is first argument
+		  In between[4,10], 1 is first argument, 10 is second argument.
+		
+4. Get list of input fields with their error messages
+		
+		Validation.field_errors()
+		
+		Returns
+		{
+			"name": [
+				"Name is required field"
+			],
+			"password" [
+				"Password should contain alphabets and numbers only",
+				"Password should be minimum 8 charcters long"
+			]
+		}
+
+5. Get just list of errors
+
+		Validation.errors()
+		
+		Returns
+		[
+			"Name is required field",
+			"Password should contain alphabets and numbers only",
+			"Password should be minimum 8 charcters long"
+		]
+	
+
+##### Available Rules
+1. required
+2. alpha
+3. numeric
+4. digit
+5. alphanumeric
+6. email
+7. uszip
+8. usphone
+9. creditcard
+10. ssn
+11. alpha_dash
+12. size[x]
+13. between[x,y]
+14. min[x]
+15. max[x]
+16. url
+17. ipaddress
+18. image
